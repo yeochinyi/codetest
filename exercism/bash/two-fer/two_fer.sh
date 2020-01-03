@@ -2,11 +2,6 @@
 
 # Simple greeting app
 main () {
-    if [[ ! -z $1 ]]; then
-        name="$1"
-    else
-        name="you"
-    fi
-    echo "One for ${name}, one for me."
+    echo "One for ${1:-you}, one for me."
 }
 main "$@"
