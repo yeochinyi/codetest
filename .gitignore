@@ -5,3 +5,5 @@
 **/__pycache__/
 **/.pytest_cache/
 **/.vs/
+**/a.exe
+**/tests.out
