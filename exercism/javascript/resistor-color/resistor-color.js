@@ -1,12 +1,6 @@
+// Returns numerical code of resistor code
 export const colorCode = (color) => {
-  const map ={}
-  var i=0
-
-  // https://hacks.mozilla.org/2015/04/es6-in-depth-iterators-and-the-for-of-loop/
-  for(var c of COLORS){
-    map[c]=i++
-  }
-  return map[color]
+  return COLORS.indexOf(color);
 };
 
 export const COLORS = [
