@@ -5,13 +5,20 @@ import "strconv"
 // Convert return Raindrops sound string if number matches
 func Convert(input int) string {
 
-	key := []int{3, 5, 7}
-	val := []string{"Pling", "Plang", "Plong"}
+	// Cannot use map here as it is unordered
+	sounds := []struct {
+		number int
+		sound  string
+	}{
+		{3, "Pling"},
+		{5, "Plang"},
+		{7, "Plong"},
+	}
 
-	ret := ""
-	for i, v := range key {
-		if input%v == 0 {
-			ret += val[i]
+	var ret string
+	for _, v := range sounds {
+		if input%v.number == 0 {
+			ret += v.sound
 		}
 	}
 

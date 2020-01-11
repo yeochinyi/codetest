@@ -2,12 +2,13 @@
 #include <stdio.h>
 
 
+#include <stdio.h>
+
 const char *hello(void)
 {
     return "Hello, World!";
 }
 
-int main() {
-    printf(hello());
-    return 0;
+void main(char* args){
+    printf("%s",hello());
 }
