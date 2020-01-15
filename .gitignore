@@ -9,3 +9,4 @@
 **/tests.out
 **/a.out
 exercism/kotlin/**/program.exe
+exercism/scala/**/target/
