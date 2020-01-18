@@ -13,7 +13,6 @@ main () {
     local searchString=""
     local printLineNum=false
     local printFileNameMatchOne=false
-    local printCaseInsenitive=false
     local printInvert=false
     local printMatchEntireLine=false
     
@@ -30,7 +29,7 @@ main () {
                 printFileNameMatchOne=true
                 ;;
             i)
-                printCaseInsenitive=true
+                shopt -s nocasematch
                 ;;
             v)
                 printInvert=true
@@ -45,6 +44,9 @@ main () {
 
         elif [[ "$searchString" == "" ]]; then
             searchString=${!i}
+            if ${printMatchEntireLine} ; then
+                searchString="^${searchString}$"
+            fi
             # echo "searchString=${searchString}"
         else
             # echo "file=${!i}"
@@ -52,6 +54,10 @@ main () {
         fi 
     }
     # echo "files=${files[@]}"
+    local isMultiple=false
+    if [[ ${#files[@]} > 1  ]]; then
+        isMultiple=true
+    fi
 
     for (( i=0;i<${#files[@]};i++ )){
         # echo "loop=${files[i]}"
@@ -59,16 +65,25 @@ main () {
         local fileLineNum=1
         while IFS= read -r line; do
             # echo "$line"
+            local matching=false
             if [[ ${line} =~ ${searchString} ]]; then
+                matching=true
+            fi
+            if ( ${printInvert} && ! ${matching} ) || ( ! ${printInvert} && ${matching} ); then
                 if ${printFileNameMatchOne}; then
                     echo "${files[i]}"
                     break
                 fi
-                local lineNum=""
-                if ${printLineNum}; then
-                    lineNum="${fileLineNum}:"
+                local linePrefix=""
+                if ${isMultiple}; then
+                    linePrefix="${files[i]}:"
                 fi
-                echo "${lineNum}${line}"
+ 
+                if ${printLineNum}; then
+                    linePrefix="${linePrefix}${fileLineNum}:"
+                fi
+
+                echo "${linePrefix}${line}"
             fi
             fileLineNum=$((fileLineNum+1))
         done < "${files[i]}"
