@@ -1,4 +1,4 @@
-**/node_modules/
+**/node_modules
 **/build/
 **/.gradle/
 **/gradle/
@@ -8,5 +8,5 @@
 **/a.exe
 **/tests.out
 **/a.out
-exercism/kotlin/**/program.exe
-exercism/scala/**/target/
+**/target
+**/program.exe
