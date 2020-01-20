@@ -13,7 +13,7 @@ object NameGenerator{
         val r = new Random(System.currentTimeMillis())
         while(true){            
             val name = f"${('A' to 'Z')(nextInt(26))}${('A' to 'Z')(nextInt(26))}${nextInt(999)}%03d"
-            printf("alreadySet=%d, name=%s\n",alreadySet.size, name)
+            //printf("alreadySet=%d, name=%s\n",alreadySet.size, name)
             if(!(alreadySet contains name)){
                 counter+=1
                 alreadySet += name
