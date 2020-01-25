@@ -1,6 +1,8 @@
 import sys
 
 #  Returns Protein Translation
+# Better solution
+# https://exercism.io/tracks/python/exercises/protein-translation/solutions/61cb3d6d0b7e4e79b5cb5c8496de8783
 def proteins(strand):
     ret = []
 
