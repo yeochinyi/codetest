@@ -4,7 +4,7 @@ class Isogram {
         def enriched = phrase
             .toLowerCase()
             .toCharArray()
-            .findAll {  it =~ '[a-z]' }
+            .findAll { it =~ '[a-z]' }
         return enriched.toSet().size() == enriched.size()
     }
 }
