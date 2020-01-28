@@ -10,3 +10,9 @@
 **/a.out
 **/target
 **/program.exe
+**/.project
+**/.classpath
+**/.idea
+**/.settings/
+**/bin/
+**/META-INF
