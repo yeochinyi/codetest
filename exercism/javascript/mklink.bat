@@ -1,0 +1,1 @@
+New-Item -Path node_modules\ -ItemType SymbolicLink -Value ..\node_modules\
