@@ -1,18 +1,6 @@
 
 leap <- function(year) {
-    if(year%%400 == 0){
-        return (TRUE)
-    }
-    if(year%%100 == 0){
-        return (FALSE)
-    }
-    if(year%%4 == 0){
-        return (TRUE)
-    }
-    return (FALSE)
-    # Alternative
-    # x <- if(year%%400 == 0) TRUE else if(year%%100 == 0) FALSE else if(year%%4 == 0) TRUE else FALSE
-    # return (x)
+    return (year%%400 == 0 | (year%%4 == 0 & year%%100 != 0))
 }
 
 # quick test using cli i.e Rscript .\leap.R 2000
