@@ -16,3 +16,4 @@
 **/.settings/
 **/bin/
 **/META-INF
+*.class
