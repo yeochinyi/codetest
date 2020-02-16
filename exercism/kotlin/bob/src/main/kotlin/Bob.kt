@@ -7,9 +7,8 @@ object Bob {
 
     class RegexWhen(val regexWhenArg: String) {
         inline fun <R: Any> Regex.then(block: (List<String>) -> R): R? = capture(regexWhenArg)?.let(block)        
-
-    fun error(): Nothing = error("Unparsed string: $regexWhenArg")
-}
+        fun error(): Nothing = error("Unparsed string: $regexWhenArg")
+    }
 
     fun hey(input: String): String {
         // Bob answers 'Sure.' if you ask him a question.
