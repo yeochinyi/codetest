@@ -28,7 +28,10 @@ object Bob {
             Regex("""^.*\?$""").then {
                 "Sure."
             } ?:
-            Regex("""^(^[a-z])?(|[A-Z])+(^[a-z])?\!?$""").then {
+            Regex("""^[0-9\W]+$""").then {
+                "Whatever."
+            } ?:            
+            Regex("""^[A-Z0-9\W]+$""").then {
                 "Whoa, chill out!"
             } ?:
             "Whatever."
