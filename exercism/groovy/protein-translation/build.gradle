@@ -1,0 +1,24 @@
+apply plugin: "groovy"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // compile "org.codehaus.groovy:groovy-all:2.5.8"
+    // testCompile platform("org.spockframework:spock-bom:2.0-M1-groovy-2.5")
+      
+    testImplementation "org.spockframework:spock-core:2.0-M2-groovy-3.0"
+    implementation "org.codehaus.groovy:groovy-all:3.0.1"
+//    testCompile "org.spockframework:spock-core"
+//    testCompile "org.spockframework:spock-junit4" // you can remove this if your code does not rely on old JUnit 4 rules
+
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        exceptionFormat = 'full'
+        events = ["passed", "failed", "skipped"]
+    }
+}
