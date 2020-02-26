@@ -18,5 +18,5 @@ class Matrix:
         # return list(map(lambda x: x[index - 1], self.matrix))
         return [x[index - 1] for x in self.matrix]
 
-if __name__ == "__main__":
-    print(Matrix("1 2\n3 4").column(1))
+# if __name__ == "__main__":
+#     print(Matrix("1 2\n3 4").column(1))
