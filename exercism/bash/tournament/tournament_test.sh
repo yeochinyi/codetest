@@ -10,14 +10,14 @@
 
 setup()    { export INPUT_FILE=$( mktemp ); }
 teardown() { rm -f "$INPUT_FILE"; }
-
+sort -rn -k8
 @test "just the header if no input" {
     #[[ $BATS_RUN_SKIPPED = true ]] || skip
 
     input=$( cat <<INPUT
 INPUT
 )
-
+f
     expected=$( cat <<EXPECTED
 Team                           | MP |  W |  D |  L |  P
 EXPECTED

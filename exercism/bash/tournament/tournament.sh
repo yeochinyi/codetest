@@ -27,9 +27,11 @@ while IFS= read -r line; do
     if [[ ${tokens[2]} == 'win' ]]; then
         ((tally_array["${tokens[0]}-win"]++))
         ((team_array["${tokens[0]}"]+=3))
+        ((tally_array["${tokens[1]}-loss"]++))
     elif [[ ${tokens[2]} == 'loss' ]]; then
         ((tally_array["${tokens[1]}-win"]++))
         ((team_array["${tokens[1]}"]+=3))
+        ((tally_array["${tokens[0]}-loss"]++))
     else        
         ((tally_array["${tokens[0]}-draw"]+=1))
         ((tally_array["${tokens[1]}-draw"]+=1))
@@ -49,11 +51,17 @@ done <<< "$input"
 # Courageous Californians        |  3 |  0 |  1 |  2 |  1
 
 # https://www.cyberciti.biz/faq/bash-for-loop-array/
+printf " Team                           | MP |  W |  D |  L |  P\n"
 for i in "${!team_array[@]}"
 do
-    printf "%s\t\t|%s|\t|%s|\t|%s|\t|%s\n" "${i}" "${tally_array[$i-win]}" "${tally_array[$i-draw]}" "${tally_array[$i-loss]}" "${team_array[$i]}"
+    win=${tally_array[$i-win]}
+    draw=${tally_array[$i-draw]}
+    loss=${tally_array[$i-loss]}
+    played=$(( ${win}+${draw}+${loss} ))
+   
+    printf " %s|%s|%s|%s|%s|%s\n" "${i}" "${played}" "${win}" "${draw}" "${loss}" "${team_array[$i]}"
     # echo "$i"
-done | sort -rn -k3
+done | column -s '|' -t | sort -rn -k7
 
 # echo ${input}
 }
