@@ -9,30 +9,25 @@ class RomanNumerals {
 
     RomanNumerals() {
         Integer.metaClass.getRoman = { ->
-
-            def ret = ""
-            delegate.toString().reverse().eachWithIndex { v, i ->
+            return delegate.toString().reverse().toList().withIndex().collect { v, i ->
                 def (ones, fives, tens) = [0,1,2].collect{ digits.charAt(i*2+it).toString() }
-                def text = ""
-                switch(v as int){
-                    case 1..3: text = ones * val
+                def val = v as int
+                switch(val){
+                    case 1..3: ones * val
                     break
-                    case 4..5: text = ones * (5-val) + fives
+                    case 4..5:  ones * (5-val) + fives
                     break
-                    case 6..8: text = fives + ones * (val-5)
+                    case 6..8: fives + ones * (val-5)
                     break
-                    case 9: text =  ones * (10-val) + tens
+                    case 9: ones * (10-val) + tens
+                    break
                 }
-                ret = text + ret
-            }
-            return ret
-
-            
+            }.findAll{it}.reverse().join("")
         }
     }
 
     static main(args){
         new RomanNumerals()
-        println 2856.roman
+        println 9.roman
     }
 }
