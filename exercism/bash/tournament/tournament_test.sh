@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# set -x
+
 # local version: 1.4.0.0
 
 # Your bash program should be able to accept input
@@ -10,26 +12,27 @@
 
 setup()    { export INPUT_FILE=$( mktemp ); }
 teardown() { rm -f "$INPUT_FILE"; }
-sort -rn -k8
 @test "just the header if no input" {
-    #[[ $BATS_RUN_SKIPPED = true ]] || skip
+    # [[ $BATS_RUN_SKIPPED = true ]] || skip
 
     input=$( cat <<INPUT
 INPUT
 )
-f
+
     expected=$( cat <<EXPECTED
 Team                           | MP |  W |  D |  L |  P
 EXPECTED
 )
 
     run bash tournament.sh  <<< "$input"
+    echo "op=$output"
+    echo "ex=$expected"
     [[ $status -eq 0 ]]
     [[ $output == "$expected" ]]
 }
 
 @test "a win is three points, a loss is zero points" {
-    [[ $BATS_RUN_SKIPPED = true ]] || skip
+    # [[ $BATS_RUN_SKIPPED = true ]] || skip
 
     cat <<INPUT >"$INPUT_FILE"
 Allegoric Alaskans;Blithering Badgers;win
@@ -43,12 +46,15 @@ EXPECTED
 )
 
     run bash tournament.sh "$INPUT_FILE"
+    echo "op=$output"
+    echo "ex=$expected"
+
     [[ $status -eq 0 ]]
     [[ $output == "$expected" ]]
 }
 
 @test "a win can also be expressed as a loss" {
-    [[ $BATS_RUN_SKIPPED = true ]] || skip
+    # [[ $BATS_RUN_SKIPPED = true ]] || skip
 
     input=$( cat <<INPUT
 Blithering Badgers;Allegoric Alaskans;loss

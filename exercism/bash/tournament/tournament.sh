@@ -1,80 +1,76 @@
 #!/usr/bin/env bash
 
-main(){
-    
-    input=$( cat <<INPUT
-Allegoric Alaskans;Blithering Badgers;win
-Devastating Donkeys;Courageous Californians;draw
-Devastating Donkeys;Allegoric Alaskans;win
-Courageous Californians;Blithering Badgers;loss
-Blithering Badgers;Devastating Donkeys;loss
-Allegoric Alaskans;Courageous Californians;win
-INPUT
-)
-
+# https://askubuntu.com/questions/678915/whats-the-difference-between-and-in-bash
+main(){    
 declare -A tally_array
 declare -A team_array
 
 while IFS= read -r line; do
-    # IFS=';'; for word in $line; do 
-    #     echo "$word"; 
-    # done
+    if [[ $line == "" ]]; then
+        break
+    fi
+    # https://www.tutorialkart.com/bash-shell-scripting/bash-split-string/
     IFS=';'; tokens=( $line )
     __init_team "${tokens[0]}"
     __init_team "${tokens[1]}"
 
-    echo "loop ${tokens[@]}"
     if [[ ${tokens[2]} == 'win' ]]; then
         ((tally_array["${tokens[0]}-win"]++))
-        ((team_array["${tokens[0]}"]+=3))
+        ((tally_array["${tokens[0]}-pts"]+=3))
         ((tally_array["${tokens[1]}-loss"]++))
     elif [[ ${tokens[2]} == 'loss' ]]; then
         ((tally_array["${tokens[1]}-win"]++))
-        ((team_array["${tokens[1]}"]+=3))
+        ((tally_array["${tokens[1]}-pts"]+=3))
         ((tally_array["${tokens[0]}-loss"]++))
     else        
         ((tally_array["${tokens[0]}-draw"]+=1))
         ((tally_array["${tokens[1]}-draw"]+=1))
-        ((team_array["${tokens[0]}"]+=1))
-        ((team_array["${tokens[1]}"]+=1))
+        ((tally_array["${tokens[0]}-pts"]+=1))
+        ((tally_array["${tokens[1]}-pts"]+=1))
     fi
 
-    # printf "%s\n" "${!tally_array[@]}" "${tally_array[@]}" | pr -2t
-done <<< "$input"
+done < "${1:-/dev/stdin}"
 
-# echo "${!team_array[@]}"
+# printf "%s\n" "${!tally_array[@]}" "${tally_array[@]}" | pr -2t
 
-# Team                           | MP |  W |  D |  L |  P
-# Devastating Donkeys            |  3 |  2 |  1 |  0 |  7
-# Allegoric Alaskans             |  3 |  2 |  0 |  1 |  6
-# Blithering Badgers             |  3 |  1 |  0 |  2 |  3
-# Courageous Californians        |  3 |  0 |  1 |  2 |  1
-
-# https://www.cyberciti.biz/faq/bash-for-loop-array/
-printf " Team                           | MP |  W |  D |  L |  P\n"
+unsorted=()
+# https://stackoverflow.com/questions/7442417/how-to-sort-an-array-in-bash
 for i in "${!team_array[@]}"
 do
+    pts=${tally_array[$i-pts]}
+    unsorted+=( "${pts}-${i}" )
+done
+
+
+IFS=$'\n' sorted=($(sort -k 1nr -t $'\t' <<<"${unsorted[*]}")); unset IFS
+# printf "[%s]\n" "${sorted[@]}"
+
+# https://www.cyberciti.biz/faq/bash-for-loop-array/
+printf "Team                           | MP |  W |  D |  L |  P"
+for combo in "${sorted[@]}"
+do
+    IFS='-'; token=( $combo )
+    i=${token[1]}
     win=${tally_array[$i-win]}
     draw=${tally_array[$i-draw]}
     loss=${tally_array[$i-loss]}
+    pts=${tally_array[$i-pts]}
     played=$(( ${win}+${draw}+${loss} ))
-   
-    printf " %s|%s|%s|%s|%s|%s\n" "${i}" "${played}" "${win}" "${draw}" "${loss}" "${team_array[$i]}"
-    # echo "$i"
-done | column -s '|' -t | sort -rn -k7
+    printf "\n%-31s|  %s |  %s |  %s |  %s |  %s" "${i}" "${played}" "${win}" "${draw}" "${loss}" "${pts}"
 
-# echo ${input}
+done
+
 }
 
 # https://linuxize.com/post/bash-functions/
 __init_team(){
     # echo "$1"
     if [[ -z ${team_array[$1]} ]]; then
-        # echo "adding $1"
-        team_array[$1]=0
+        team_array["$1"]=1
         tally_array["$1-win"]=0
         tally_array["$1-loss"]=0
         tally_array["$1-draw"]=0
+        tally_array["$1-pts"]=0
     fi
 }
 main "$@"
