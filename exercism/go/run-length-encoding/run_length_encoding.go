@@ -6,14 +6,7 @@ import (
 	"unicode"
 )
 
-func GetStringOfCounter(counter int, lastChar string) string {
-	num := ""
-	if counter != 1 {
-		num = strconv.Itoa(counter)
-	}
-	return num + lastChar
-}
-
+// RunLengthEncode encodes text
 func RunLengthEncode(text string) string {
 	if text == "" {
 		return ""
@@ -22,20 +15,29 @@ func RunLengthEncode(text string) string {
 	var counter int = 0
 	var lastChar string = ""
 
+	GenString := func(counter int, lastChar string) string {
+		num := ""
+		if counter != 1 {
+			num = strconv.Itoa(counter)
+		}
+		return num + lastChar
+	}
+
 	for _, c := range text {
 		r := string(c)
 		if lastChar == "" || lastChar == r {
 			counter++
 		} else {
-			output = output + GetStringOfCounter(counter, lastChar)
+			output = output + GenString(counter, lastChar)
 			counter = 1
 		}
 		lastChar = r
 	}
 
-	return output + GetStringOfCounter(counter, lastChar)
+	return output + GenString(counter, lastChar)
 }
 
+// RunLengthDecode decodes text
 func RunLengthDecode(text string) string {
 	output := ""
 	numString := ""
