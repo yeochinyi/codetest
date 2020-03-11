@@ -7,48 +7,47 @@ class Reactor<T>() {
         fun cancel()
     }
 
-    inner class CellSubscription(): Subscription {
+    inner class CellSubscription(val cell: Cell,val cb: (T)->Unit): Subscription {
         override fun cancel() {
+            cell.removeCallback(cb)
         }
     }
 
     inner abstract class Cell(input:T){
-        var set = mutableSetOf<Cell>()
+        var dependentSet = mutableSetOf<Cell>()
+
+        open fun cellCallback(){}
 
         var value: T by Delegates.observable(input){
-            _, old, new ->            
+            _, old, new ->
             if(old != new){
-                set.forEach{ it.cellCallback() }
-                if(callback != null){
-                    callback?.invoke(value)
-                }
+                dependentSet.forEach{ it.cellCallback() }
+                callbacks.forEach{ it.invoke(value) }
             }
-            
         }
         
-        fun register(cell:Cell){
-            set.add(cell)
+        fun registerDependent(cell:Cell){
+            dependentSet.add(cell)
         }
 
-        abstract fun cellCallback()
+        var callbacks = mutableListOf<((T)->Unit)>()
 
-        var callback: ((T)->Unit)? = null
-
-        fun addCallback(cb: (T)->Unit):Subscription {            
-            this.callback = cb
-            return CellSubscription()
+        fun addCallback(cb: (T)->Unit):Subscription {
+            callbacks.add(cb)
+            return CellSubscription(this, cb)
         }
 
-
+        fun removeCallback(cb: (T)->Unit) {
+            callbacks.remove(cb)
+        }
     }
 
-    inner class InputCell(input:T):Cell(input){
-        override fun cellCallback() {}
-    }
-
+    inner class InputCell(input:T):Cell(input)
+    
+    // TODO hack... need to set set least 1 value in superclass Cell...
     inner class ComputeCell(vararg val inputs: Cell, val compute:(List<T>) -> T):Cell(inputs[0].value){
         init{
-            inputs.forEach{it.register(this)}
+            inputs.forEach{it.registerDependent(this)}
             cellCallback()
         }
 
