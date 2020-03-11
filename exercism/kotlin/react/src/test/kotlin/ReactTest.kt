@@ -142,7 +142,7 @@ class ReactTest {
         assertEquals(listOf(3), vals2)
     }
 
-    @Ignore
+    // @Ignore
     @Test
     fun callbacksShouldOnlyBeCalledOnceEvenIfMultipleDependenciesChange() {
         val reactor = Reactor<Int>()
