@@ -96,7 +96,7 @@ class ReactTest {
         assertEquals(listOf(222), vals)
     }
 
-    @Ignore
+    // @Ignore
     @Test
     fun callbacksCanBeAddedAndRemoved() {
         val reactor = Reactor<Int>()

@@ -7,55 +7,74 @@ class Reactor<T>() {
         fun cancel()
     }
 
-    inner class CellSubscription(): Subscription {
+    inner class CellSubscription(val cell: Cell,val cb: (T)->Unit): Subscription {
         override fun cancel() {
+            cell.removeCallback(cb)
         }
     }
 
     inner abstract class Cell(input:T){
-        var set = mutableSetOf<Cell>()
+        var dependentSet = mutableSetOf<Cell>()
+        var upstreamSet = mutableSetOf<Cell>()
 
-        var value: T by Delegates.observable(input){
-            _, old, new ->            
-            println("old=${old}, new=${new}")
-            if(old != new){
-                set.forEach{ it.cellCallback() }
-                if(callback != null){
-                    callback?.invoke(value)
-                    println("invoke callback")
+        var dirty = false
+
+        open fun cellCallback(){
+            dirty = true
+        }
+
+        var callbacks = mutableListOf<((T)->Unit)>()
+
+        // var value: T by Delegates.observable(input){
+        var value: T
+            get() = _value!!
+            set(newValue){
+                println("${this.javaClass.kotlin} newValue=${newValue}")
+                if(newValue != _value){
+                    dependentSet.forEach{ it.cellCallback() }
+                    // println("${this.javaClass.kotlin} upstreamSet=${upstreamSet.map{it.dirty}}")
+                    if(!upstreamSet.any{ it.dirty }){
+                        // println("callbacks=${callbacks}")
+                        callbacks.forEach{ it.invoke(newValue) }
+                    }
+                    dirty = false                
                 }
+                _value = newValue
             }
-            
+        var _value: T? = null
+
+        init{
+            this.value = input
         }
         
-        fun register(cell:Cell){
-            set.add(cell)
+        fun registerDependent(cell:Cell){
+            dependentSet.add(cell)
         }
 
-        abstract fun cellCallback()
-
-        var callback: ((T)->Unit)? = null
-
-        fun addCallback(cb: (T)->Unit):Subscription {            
-            this.callback = cb
-            println("add callback")
-            return CellSubscription()
+        fun addCallback(cb: (T)->Unit):Subscription {
+            callbacks.add(cb)
+            return CellSubscription(this, cb)
         }
 
-
+        fun removeCallback(cb: (T)->Unit) {
+            callbacks.remove(cb)
+        }
     }
 
-    inner class InputCell(input:T):Cell(input){
-        override fun cellCallback() {}
-    }
-
+    inner class InputCell(input:T):Cell(input)
+    
+    // TODO hack... need to set set least 1 value in superclass Cell...
     inner class ComputeCell(vararg val inputs: Cell, val compute:(List<T>) -> T):Cell(inputs[0].value){
         init{
-            inputs.forEach{it.register(this)}
+            inputs.forEach{
+                upstreamSet.add(it)
+                it.registerDependent(this)
+            }
             cellCallback()
-        }
+        }        
 
-        override fun cellCallback() {            
+        override fun cellCallback() {     
+            super.cellCallback()       
             value = compute(inputs.map{it->it.value})
             // println("cellCallback value=${value}")
         }
@@ -64,6 +83,8 @@ class Reactor<T>() {
 }
 
 fun main(args:Array<String>) {
+        // fun callbacksShouldOnlyBeCalledOnceEvenIfMultipleDependenciesChange() {
+
         val reactor = Reactor<Int>()
         val input = reactor.InputCell(1)
         val plusOne = reactor.ComputeCell(input) { it[0] + 1 }
@@ -76,5 +97,8 @@ fun main(args:Array<String>) {
 
         input.value = 4
         // assertEquals(listOf(10), vals)
+
+        println("vals=${vals}")
+
 }
 
