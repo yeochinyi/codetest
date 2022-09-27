@@ -1,0 +1,22 @@
+{
+  "blurb": "Determine if a sentence is a pangram.",
+  "authors": [
+    "mhinz"
+  ],
+  "contributors": [
+    "kotp"
+  ],
+  "files": {
+    "solution": [
+      "pangram.vim"
+    ],
+    "test": [
+      "pangram.vader"
+    ],
+    "example": [
+      ".meta/example.vim"
+    ]
+  },
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Pangram"
+}

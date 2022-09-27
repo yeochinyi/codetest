@@ -1,0 +1,22 @@
+{
+  "blurb": "We are going to do the `Transform` step of an Extract-Transform-Load.",
+  "authors": [
+    "mhinz"
+  ],
+  "contributors": [
+    "kotp"
+  ],
+  "files": {
+    "solution": [
+      "etl.vim"
+    ],
+    "test": [
+      "etl.vader"
+    ],
+    "example": [
+      ".meta/example.vim"
+    ]
+  },
+  "source": "The Jumpstart Lab team",
+  "source_url": "http://jumpstartlab.com"
+}

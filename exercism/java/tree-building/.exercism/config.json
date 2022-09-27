@@ -1,0 +1,24 @@
+{
+  "blurb": "Refactor a tree building algorithm.",
+  "authors": [
+    "junming403"
+  ],
+  "contributors": [
+    "jmrunkle",
+    "lemoncurry",
+    "msomji",
+    "muzimuzhi",
+    "uzilan"
+  ],
+  "files": {
+    "solution": [
+      "src/main/java/BuildTree.java"
+    ],
+    "test": [
+      "src/test/java/BuildTreeTest.java"
+    ],
+    "example": [
+      ".meta/src/reference/java/BuildTree.java"
+    ]
+  }
+}

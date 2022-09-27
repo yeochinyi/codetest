@@ -1,0 +1,22 @@
+{
+  "blurb": "Implement the logic of the hangman game using functional reactive programming.",
+  "authors": [
+    "Kineolyan"
+  ],
+  "contributors": [
+    "mirkoperillo",
+    "msomji",
+    "muzimuzhi"
+  ],
+  "files": {
+    "solution": [
+      "src/main/java/Hangman.java"
+    ],
+    "test": [
+      "src/test/java/HangmanTest.java"
+    ],
+    "example": [
+      ".meta/src/reference/java/Hangman.java"
+    ]
+  }
+}
