@@ -1,0 +1,25 @@
+{
+  "blurb": "Given a year, report if it is a leap year.",
+  "authors": [],
+  "contributors": [
+    "alexanderific",
+    "amscotti",
+    "Dispader",
+    "ikhadykin",
+    "kytrinyx",
+    "sjwarner-bp"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/Leap.groovy"
+    ],
+    "test": [
+      "src/test/groovy/LeapSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/Leap.groovy"
+    ]
+  },
+  "source": "JavaRanch Cattle Drive, exercise 3",
+  "source_url": "http://www.javaranch.com/leap.jsp"
+}

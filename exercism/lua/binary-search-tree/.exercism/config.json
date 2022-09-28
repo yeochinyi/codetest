@@ -1,0 +1,22 @@
+{
+  "blurb": "Insert and search for numbers in a binary tree.",
+  "authors": [
+    "ryanplusplus"
+  ],
+  "contributors": [
+    "aarti"
+  ],
+  "files": {
+    "solution": [
+      "binary-search-tree.lua"
+    ],
+    "test": [
+      "binary-search-tree_spec.lua"
+    ],
+    "example": [
+      ".meta/example.lua"
+    ]
+  },
+  "source": "Josh Cheek",
+  "source_url": "https://twitter.com/josh_cheek"
+}

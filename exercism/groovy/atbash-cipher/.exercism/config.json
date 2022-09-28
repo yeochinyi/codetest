@@ -1,0 +1,19 @@
+{
+  "blurb": "Create an implementation of the atbash cipher, an ancient encryption system created in the Middle East.",
+  "authors": [
+    "amscotti"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/AtbashCipher.groovy"
+    ],
+    "test": [
+      "src/test/groovy/AtbashCipherSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/AtbashCipher.groovy"
+    ]
+  },
+  "source": "Wikipedia",
+  "source_url": "http://en.wikipedia.org/wiki/Atbash"
+}

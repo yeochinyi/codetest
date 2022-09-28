@@ -1,0 +1,17 @@
+{
+  "blurb": "Implement a basic reactive system.",
+  "authors": [
+    "ryanplusplus"
+  ],
+  "files": {
+    "solution": [
+      "react.lua"
+    ],
+    "test": [
+      "react_spec.lua"
+    ],
+    "example": [
+      ".meta/example.lua"
+    ]
+  }
+}

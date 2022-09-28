@@ -1,0 +1,24 @@
+{
+  "blurb": "Create an implementation of the rotational cipher, also sometimes called the Caesar cipher.",
+  "authors": [
+    "Raibaz"
+  ],
+  "contributors": [
+    "amscotti",
+    "ikhadykin",
+    "sjwarner-bp"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/RotationalCipher.groovy"
+    ],
+    "test": [
+      "src/test/groovy/RotationalCipherSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/RotationalCipher.groovy"
+    ]
+  },
+  "source": "Wikipedia",
+  "source_url": "https://en.wikipedia.org/wiki/Caesar_cipher"
+}

@@ -12,8 +12,9 @@ for exer in $list; do
     echo checking $exer
     if [ ! -d "$exer_dir" ]; then 
         exercism download --exercise=$exer --track=$1
-        echo exit_code=$?
-        if [[ $? -eq 0 ]]; then
+        exit_code=$?
+        echo exit_code=$exit_code
+        if [[ $exit_code -eq 0 ]]; then
             echo downloaded $exer
             (( num_dl_ok +=1 ))
         else

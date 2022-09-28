@@ -1,0 +1,22 @@
+{
+  "blurb": "Score a bowling game",
+  "authors": [
+    "ryanplusplus"
+  ],
+  "contributors": [
+    "aarti"
+  ],
+  "files": {
+    "solution": [
+      "bowling.lua"
+    ],
+    "test": [
+      "bowling_spec.lua"
+    ],
+    "example": [
+      ".meta/example.lua"
+    ]
+  },
+  "source": "The Bowling Game Kata at but UncleBob",
+  "source_url": "http://butunclebob.com/ArticleS.UncleBob.TheBowlingGameKata"
+}

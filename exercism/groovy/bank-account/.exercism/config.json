@@ -1,0 +1,21 @@
+{
+  "blurb": "Simulate a bank account supporting opening/closing, withdraws, and deposits of money. Watch out for concurrent transactions!",
+  "authors": [
+    "okaram"
+  ],
+  "contributors": [
+    "amscotti",
+    "sjwarner-bp"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/BankAccount.groovy"
+    ],
+    "test": [
+      "src/test/groovy/BankAccountSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/BankAccount.groovy"
+    ]
+  }
+}

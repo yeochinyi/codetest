@@ -1,0 +1,21 @@
+{
+  "blurb": "Implement a doubly linked list",
+  "authors": [],
+  "contributors": [
+    "amscotti",
+    "ikhadykin",
+    "Raibaz"
+  ],
+  "files": {
+    "solution": [
+      "src/main/groovy/DoubleLinkedList.groovy"
+    ],
+    "test": [
+      "src/test/groovy/DoubleLinkedListSpec.groovy"
+    ],
+    "example": [
+      ".meta/src/reference/groovy/DoubleLinkedList.groovy"
+    ]
+  },
+  "source": "Classic computer science topic"
+}

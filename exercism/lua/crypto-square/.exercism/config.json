@@ -1,0 +1,22 @@
+{
+  "blurb": "Implement the classic method for composing secret messages called a square code.",
+  "authors": [
+    "ryanplusplus"
+  ],
+  "contributors": [
+    "aarti"
+  ],
+  "files": {
+    "solution": [
+      "crypto-square.lua"
+    ],
+    "test": [
+      "crypto-square_spec.lua"
+    ],
+    "example": [
+      ".meta/example.lua"
+    ]
+  },
+  "source": "J Dalbey's Programming Practice problems",
+  "source_url": "http://users.csc.calpoly.edu/~jdalbey/103/Projects/ProgrammingPractice.html"
+}
