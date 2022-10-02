@@ -1,11 +1,11 @@
-arguments=
+arguments=--init-script /Users/yeochinyi/.config/coc/extensions/coc-java-data/server/config_mac/org.eclipse.osgi/50/0/.cp/gradle/init/init.gradle
 auto.sync=false
 build.scans.enabled=false
-connection.gradle.distribution=GRADLE_DISTRIBUTION(LOCAL_INSTALLATION(/home/chris/.sdkman/candidates/gradle/current))
+connection.gradle.distribution=GRADLE_DISTRIBUTION(LOCAL_INSTALLATION(/Users/yeochinyi/.sdkman/candidates/gradle/current))
 connection.project.dir=
 eclipse.preferences.version=1
 gradle.user.home=
-java.home=/home/chris/.sdkman/candidates/java/current
+java.home=/Users/yeochinyi/.sdkman/candidates/java/17.0.3-zulu/zulu-17.jdk/Contents/Home
 jvm.arguments=
 offline.mode=false
 override.workspace.settings=true

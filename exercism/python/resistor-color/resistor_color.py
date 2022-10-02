@@ -1,6 +1,21 @@
+
+colors_list = [
+    "black",
+    "brown",
+    "red",
+    "orange",
+    "yellow",
+    "green",
+    "blue",
+    "violet",
+    "grey",
+    "white",
+]
 def color_code(color):
-    pass
+    return colors_list.index(color)
+
+
 
 
 def colors():
-    pass
+    return colors_list
