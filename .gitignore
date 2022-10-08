@@ -1,21 +1,12 @@
-**/node_modules
-**/build/
-**/.gradle/
-**/gradle/
-**/__pycache__/
-**/.pytest_cache/
-**/.vs/
-**/a.exe
-**/tests.out
-**/a.out
-**/target
-**/program.exe
-**/.project
-**/.classpath
-**/.idea
-**/.settings/
-**/bin/
-**/META-INF
-*.class
-**/.settings
-**/out.jar
+# IDE Files
+#-------------------------
+/nbproject/
+.idea/*
+
+## Sublime Text cache files
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+*.sublime-workspace
+*.sublime-project
+
